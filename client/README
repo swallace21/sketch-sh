@@ -1,0 +1,42 @@
+# repo for Sketch.sh
+# https://github.com/Sketch-sh/sketch-sh
+
+################################################
+#### INIT STEPS
+
+# install apache2
+apt install apache2
+
+#
+# if using apache2
+# change this file (/etc/apache2/sites-available/000-default.conf) 
+# to look like this:
+#
+#<VirtualHost *:80>
+#        ServerAdmin webmaster@localhost
+#        DocumentRoot /var/www/html/sketch-sh/client/build
+#        ErrorLog ${APACHE_LOG_DIR}/error.log
+#        CustomLog ${APACHE_LOG_DIR}/access.log combined
+#</VirtualHost>
+
+# restart apache2
+systemctl restart apache2
+
+# global installs
+npm install yarn -g
+
+####################################
+#### REBUILD CODE
+
+# get code
+cd /var/www/html
+git clone https://github.com/Sketch-sh/sketch-sh
+
+# building the client side code
+cd /var/www/html/sketch-sh/client
+yarn install
+yarn build && yarn cache clean
+# this build the code in  /var/www/html/sketch-sh/client/build
+# apache2 serves that build directory as a static folder, 
+# so after you build it should be good :)
+# ...unless your browser is doing some aggressive caching

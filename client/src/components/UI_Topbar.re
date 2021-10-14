@@ -36,14 +36,6 @@ let make = _children => {
                "New Sketch"->str
              </Router.Link>
         </UI_Balloon>
-        <AuthStatus.UserInfo>
-          ...{user =>
-            switch (user) {
-            | None => loginButton
-            | Some((user, _userId)) => <UI_TopbarUserInfo user />
-            }
-          }
-        </AuthStatus.UserInfo>
       </div>
     </header>,
 };

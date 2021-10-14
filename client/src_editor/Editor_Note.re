@@ -243,28 +243,6 @@ module Editor_Note = {
                   registerShortcut
                   className=buttonClassName
                 />
-                <Editor_Note_ForkButton
-                  hasSavePermission={state.hasSavePermission}
-                  noteId={state.noteId}
-                  noteState={state.noteState}
-                  updateForkStatus={forkStatus =>
-                    forkStatus->UpdateForkStatus->send
-                  }
-                  getCurrentData={() =>
-                    (
-                      state.title,
-                      Editor_Json.V1.encode(
-                        state.lang,
-                        state.links,
-                        Editor_Blocks_Utils.filterDeletedBlocks(
-                          state.blocks^,
-                        ),
-                      ),
-                    )
-                  }
-                  className=buttonClassName
-                  forkStatus={state.forkStatus}
-                />
                 <UI_Balloon message="Sketch language" position=Down>
                   ...<fieldset
                        className="EditorNote__lang"
